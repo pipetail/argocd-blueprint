@@ -1,12 +1,7 @@
 package main
 
-import "fmt"
+import "github.com/pipetail/argocd-blueprint/pkg/server"
 
 func main() {
-	fmt.Println("works")
-}
-
-// plus adds a to b
-func plus(a int, b int) int {
-	return a + b
+	server.Run()
 }
