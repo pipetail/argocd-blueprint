@@ -6,6 +6,7 @@ pull_request_rules:
       - label=ready-to-merge
     actions:
       merge:
-        method: rebase
+        method: squash
         strict: true
+        strict_method: rebase
 
