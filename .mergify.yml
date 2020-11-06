@@ -5,5 +5,7 @@ pull_request_rules:
       - check-success=verify
       - label=ready-to-merge
     actions:
-      rebase: {}
+      merge:
+        method: rebase
+        strict: true
 
