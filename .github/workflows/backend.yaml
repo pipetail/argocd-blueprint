@@ -1,0 +1,15 @@
+on:
+  pull_request:
+    paths:
+      - 'applications/backend/**'
+  
+jobs:
+  verify:
+    name: verify
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-go@v2
+        with:
+          go-version: '^1.15.4'
+      - run: go version
