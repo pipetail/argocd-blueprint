@@ -1,9 +1,7 @@
 pull_request_rules:
-  - name: Automatic merge backend if checks pass
+  - name: Automatic merge backend if checks pass (backend, cmd)
     conditions:
       - files~=^(!?cmd/backend)
-      - files~=^(!?pkg/server)
-      - files~=^(!?internal/backend)
       - check-success=verify
       - label=ready-to-merge
     actions:
@@ -12,3 +10,24 @@ pull_request_rules:
         strict: true
         strict_method: rebase
 
+  - name: Automatic merge backend if checks pass (shared package, server)
+    conditions:
+      - files~=^(!?pkg/server)
+      - check-success=verify
+      - label=ready-to-merge
+    actions:
+      merge:
+        method: squash
+        strict: true
+        strict_method: rebase
+
+  - name: Automatic merge backend if checks pass (internal, backend)
+    conditions:
+      - files~=^(!?internal/backend)
+      - check-success=verify
+      - label=ready-to-merge
+    actions:
+      merge:
+        method: squash
+        strict: true
+        strict_method: rebase
