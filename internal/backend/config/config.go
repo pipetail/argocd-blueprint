@@ -8,7 +8,8 @@ import (
 )
 
 type Config struct {
-	Address string `env:"CONFIG_BACKEND_ADDRESS,default=:8080"`
+	Address   string `env:"CONFIG_BACKEND_ADDRESS,default=:8080"`
+	LogFormat string `env:"CONFIG_BACKEND_LOG_FORMAT,default=json"`
 }
 
 func Get() Config {
