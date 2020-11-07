@@ -4,7 +4,7 @@ on:
       - 'pkg/server/**'
   
 jobs:
-  verify server package:
+  verify-pkg-server:
     name: verify-pkg-server
     runs-on: ubuntu-20.04
     steps:

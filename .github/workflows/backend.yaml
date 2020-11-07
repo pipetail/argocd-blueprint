@@ -6,7 +6,7 @@ on:
       - 'internal/backend/**'
   
 jobs:
-  verify backend build:
+  verify-service-backend:
     name: verify-service-backend
     runs-on: ubuntu-20.04
     steps:
