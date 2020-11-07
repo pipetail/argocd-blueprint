@@ -4,7 +4,7 @@ pull_request_rules:
       - files~=^(!?cmd/backend)
       - check-success=verify-service-backend
       - label=ready-to-merge
-      - #check-failure=0
+      - "#check-failure=0"
     actions:
       merge:
         method: squash
@@ -16,7 +16,7 @@ pull_request_rules:
       - files~=^(!?pkg/server)
       - check-success=verify-pkg-server
       - label=ready-to-merge
-      - #check-failure=0
+      - "#check-failure=0"
     actions:
       merge:
         method: squash
@@ -28,7 +28,7 @@ pull_request_rules:
       - files~=^(!?pkg/secret)
       - check-success=verify-pkg-secret
       - label=ready-to-merge
-      - #check-failure=0
+      - "#check-failure=0"
     actions:
       merge:
         method: squash
@@ -40,9 +40,16 @@ pull_request_rules:
       - files~=^(!?internal/backend)
       - check-success=verify-service-backend
       - label=ready-to-merge
-      - #check-failure=0
+      - "#check-failure=0"
     actions:
       merge:
         method: squash
         strict: true
         strict_method: rebase
+pull_request_rules:
+  - name: Automatic merge on approval
+    conditions:
+      - "#approved-reviews-by>=1"
+    actions:
+      merge:
+        method: merge
