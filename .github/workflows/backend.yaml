@@ -3,6 +3,7 @@ on:
     paths:
       - 'applications/backend/**'
       - 'pkg/server/**'
+      - 'internal/backend/**'
   
 jobs:
   verify:

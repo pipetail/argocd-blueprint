@@ -3,6 +3,7 @@ pull_request_rules:
     conditions:
       - files~=^(!?cmd/backend)
       - files~=^(!?pkg/server)
+      - files~=^(!?internal/backend)
       - check-success=verify
       - label=ready-to-merge
     actions:
