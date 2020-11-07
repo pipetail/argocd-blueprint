@@ -23,6 +23,18 @@ pull_request_rules:
         strict: true
         strict_method: rebase
 
+  - name: Automatic merge backend if checks pass (shared package, secret)
+    conditions:
+      - files~=^(!?pkg/secret)
+      - check-success=verify-pkg-secret
+      - label=ready-to-merge
+      - #check-failure=0
+    actions:
+      merge:
+        method: squash
+        strict: true
+        strict_method: rebase
+
   - name: Automatic merge backend if checks pass (internal, backend)
     conditions:
       - files~=^(!?internal/backend)
