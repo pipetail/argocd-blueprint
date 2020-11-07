@@ -9,6 +9,8 @@ type InputConfig interface {
 type Server struct {
 	Engine *gin.Engine
 	Config InputConfig
+	// Secrets["nameOfSecret"] = "/v1.0/secrets/kubernetes/my-secret"
+	Secrets map[string]string
 }
 
 func New(c InputConfig) Server {
