@@ -2,6 +2,7 @@ on:
   pull_request:
     paths:
       - 'applications/backend/**'
+      - 'pkg/server/**'
   
 jobs:
   verify:
