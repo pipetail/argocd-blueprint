@@ -2,7 +2,7 @@ pull_request_rules:
   - name: Automatic merge backend if checks pass (backend, cmd)
     conditions:
       - files~=^(!?cmd/backend)
-      - check-success=verify
+      - check-success=verify-service-backend
       - label=ready-to-merge
     actions:
       merge:
@@ -13,7 +13,7 @@ pull_request_rules:
   - name: Automatic merge backend if checks pass (shared package, server)
     conditions:
       - files~=^(!?pkg/server)
-      - check-success=verify
+      - check-success=verify-pkg-server
       - label=ready-to-merge
     actions:
       merge:
@@ -24,7 +24,7 @@ pull_request_rules:
   - name: Automatic merge backend if checks pass (internal, backend)
     conditions:
       - files~=^(!?internal/backend)
-      - check-success=verify
+      - check-success=verify-service-backend
       - label=ready-to-merge
     actions:
       merge:
