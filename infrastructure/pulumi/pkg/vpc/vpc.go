@@ -18,8 +18,10 @@ type Subnet struct {
 func New(ctx *pulumi.Context, name string, vpcCIDR string) (Vpc, error) {
 	var output Vpc
 
-	vpc, err := ec2.NewVpc(ctx, "main", &ec2.VpcArgs{
-		CidrBlock: pulumi.String("10.0.0.0/16"),
+	vpc, err := ec2.NewVpc(ctx, name, &ec2.VpcArgs{
+		CidrBlock:          pulumi.String(vpcCIDR),
+		EnableDnsHostnames: pulumi.Bool(true),
+		EnableDnsSupport:   pulumi.Bool(true),
 	})
 
 	if err != nil {
