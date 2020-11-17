@@ -3,36 +3,39 @@ package secret
 import (
 	"encoding/json"
 	"fmt"
-	"io/ioutil"
-	"net/http"
+	"os"
+
+	"github.com/aws/aws-sdk-go/aws"
+	"github.com/aws/aws-sdk-go/aws/session"
+	"github.com/aws/aws-sdk-go/service/secretsmanager"
 )
 
-// Get obtains single secret from the DAPR API
-func Get(port int, path string, key string) (string, error) {
-	url := fmt.Sprintf("http://localhost:%d/%s", port, path)
-	res, err := http.Get(url)
+type Secret struct {
+	MySQLPassword string `json:"mysqlPassword"`
+}
+
+func Get(name string, version string) (Secret, error) {
+	region := os.Getenv("AWS_REGION")
+	secret := Secret{}
+
+	svc := secretsmanager.New(session.New(&aws.Config{
+		Region: &region,
+	}))
+
+	input := &secretsmanager.GetSecretValueInput{
+		SecretId:     aws.String(name),
+		VersionStage: aws.String(version),
+	}
+
+	result, err := svc.GetSecretValue(input)
 	if err != nil {
-		return "", fmt.Errorf("could not get secret from DAPR API: %s", err)
+		return secret, fmt.Errorf("could not obtain secret: %s", err)
 	}
-	defer res.Body.Close()
 
-	// read secret body
-	body, err := ioutil.ReadAll(res.Body)
+	err = json.Unmarshal([]byte(*result.SecretString), &secret)
 	if err != nil {
-		return "", fmt.Errorf("could not get secret body retreived from from DAPR API: %s", err)
+		return secret, fmt.Errorf("could not unmarshal secret: %s", err)
 	}
 
-	// parse JSON
-	var secrets map[string]string
-	err = json.Unmarshal(body, &secrets)
-	if err != nil {
-		return "", fmt.Errorf("could not unmarshal JSON: %s", err)
-	}
-
-	// check if key exist
-	if val, ok := secrets[key]; ok {
-		return val, nil
-	}
-
-	return "", fmt.Errorf("key %s does not exist in received object", key)
+	return secret, nil
 }

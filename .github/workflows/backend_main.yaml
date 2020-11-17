@@ -37,8 +37,8 @@ jobs:
       - build-service-backend
     steps:
       - uses: actions/checkout@v2
-      - run: sed -i "s|local defaultTag = .*;|local defaultTag = \"${{ github.sha }}\";|g" deploy/backend/main.jsonnet
-      - run: grep "defaultTag" deploy/backend/main.jsonnet
+      - run: sed -i "s|local defaultTag = .*;|local defaultTag = \"${{ github.sha }}\";|g" deploy/backend/deployment.jsonnet
+      - run: grep "defaultTag" deploy/backend/deployment.jsonnet
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v3
         with:
