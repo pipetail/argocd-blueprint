@@ -36,5 +36,18 @@ jobs:
       - build-service-backend
     steps:
       - uses: actions/checkout@v2
-      - run: sed -i "s|local defaultTag = .*;|local defaultTag = \"${{ github.sha }}\"|g" deploy/backend/main.jsonnet
+      - run: sed -i "s|local defaultTag = .*;|local defaultTag = \"${{ github.sha }}\";|g" deploy/backend/main.jsonnet
       - run: grep "defaultTag" deploy/backend/main.jsonnet
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: '[Deployment][Backend] update current image tag'
+          committer: GitHub <noreply@github.com>
+          author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
+          signoff: false
+          branch: deploy/${{github.sha}}
+          delete-branch: true
+          title: '[Deployment][Backend] update current image tag'
+          assignees: ${{ github.actor }}
+          draft: false
