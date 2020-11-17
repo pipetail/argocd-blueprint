@@ -1,0 +1,28 @@
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'applications/backend/**'
+      - 'pkg/server/**'
+      - 'internal/backend/**'
+      - 'docker/backend/Dockerfile'
+
+jobs:
+  build-service-backend:
+    name: build-service-backend
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-go@v2
+        with:
+          go-version: '^1.15.4'
+      - run: go build -o bin/backend ./cmd/backend
+      - run: ls -lah bin/backend
+      - name: Docker Login
+        uses: azure/docker-login@v1
+        with:
+          login-server: docker.pkg.github.com
+          username: $GITHUB_ACTOR
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - run: docker build -t docker.pkg.github.com/pipetail/argocd-blueprint/backend:${{ github.sha }} -f docker/backend/Dockerfile .
