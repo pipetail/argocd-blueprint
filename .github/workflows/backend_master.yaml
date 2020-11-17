@@ -7,6 +7,7 @@ on:
       - 'pkg/server/**'
       - 'internal/backend/**'
       - 'docker/backend/Dockerfile'
+      - '.github/backend_master.yaml'
 
 jobs:
   build-service-backend:
@@ -26,3 +27,12 @@ jobs:
           username: $GITHUB_ACTOR
           password: ${{ secrets.GITHUB_TOKEN }}
       - run: docker build -t docker.pkg.github.com/pipetail/argocd-blueprint/backend:${{ github.sha }} -f docker/backend/Dockerfile .
+      - run: docker push docker.pkg.github.com/pipetail/argocd-blueprint/backend:${{ github.sha }}
+
+  deployment-manifests-backend:
+    name: deployment-manifests-backend
+    runs-on: ubuntu-20.04
+    needs:
+      - build-service-backend
+    steps:
+      - run: echo push some crap
