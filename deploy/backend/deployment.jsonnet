@@ -11,6 +11,7 @@ local podAnnotations = {
     "dapr.io/enabled": "true",
     "dapr.io/id": "backend",
     "dapr.io/port": "8080",
+    "dapr.io/log-level": "debug",
 };
 
 function(repository=defaultRepository, tag=defaultTag)
