@@ -48,3 +48,5 @@ jobs:
           title: '[Deployment][Backend] update current image tag'
           assignees: ${{ github.actor }}
           draft: false
+          labels: |
+            ready-to-merge
