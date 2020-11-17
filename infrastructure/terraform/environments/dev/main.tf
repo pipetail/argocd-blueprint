@@ -55,6 +55,10 @@ module "eks" {
       enable_monitoring       = false
       tags                    = concat(local.autoscaling_tags)
       kubelet_extra_args      = "--kube-reserved=memory=0.3Gi,ephemeral-storage=1Gi --system-reserved=memory=0.2Gi,ephemeral-storage=1Gi --eviction-hard=memory.available<200Mi,nodefs.available<10%"
+      target_group_arns = [
+        module.alb.http_lb_target_group_id,
+        module.alb.https_lb_target_group_id,
+      ]
     }
   ]
 }
