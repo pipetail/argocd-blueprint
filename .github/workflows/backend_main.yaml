@@ -21,6 +21,7 @@ jobs:
         env:
           CGO_ENABLED: "0" 
           GOOS: linux
+          GOARCH: amd64
       - run: go build -a -installsuffix cgo -o bin/backend ./cmd/backend
       - run: ls -lah bin/backend
       - run: echo $CR_PAT | docker login ghcr.io -u vranystepan --password-stdin
