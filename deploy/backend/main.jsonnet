@@ -5,7 +5,7 @@ local containerPort = k.core.v1.containerPort;
 local readinessProbe = container.readinessProbe;
 
 local defaultRepository = "docker.pkg.github.com/pipetail/argocd-blueprint/backend";
-local defaultTag = "5c6522f56d8120995018b6eef14076a6d67ba8da";
+local defaultTag = "756c981a3ecb6a002f4b648f8587bd68d4d70994";
 
 local podAnnotations = {
     "dapr.io/enabled": "true",
