@@ -47,3 +47,14 @@ pull_request_rules:
         strict: true
         strict_method: rebase
 
+  - name: Automatic merge backend if checks pass (deployment, backend)
+    conditions:
+      - files~=^(!?deploy/backend)
+      - label=ready-to-merge
+      - "#check-failure=0"
+    actions:
+      merge:
+        method: squash
+        strict: true
+        strict_method: rebase
+
