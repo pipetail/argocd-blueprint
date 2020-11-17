@@ -3,7 +3,6 @@ package secret
 import (
 	"encoding/json"
 	"fmt"
-	"os"
 
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/session"
@@ -15,12 +14,10 @@ type Secret struct {
 }
 
 func Get(name string, version string) (Secret, error) {
-	region := os.Getenv("AWS_REGION")
 	secret := Secret{}
 
-	svc := secretsmanager.New(session.New(&aws.Config{
-		Region: &region,
-	}))
+	sess := session.Must(session.NewSession())
+	svc := secretsmanager.New(sess)
 
 	input := &secretsmanager.GetSecretValueInput{
 		SecretId:     aws.String(name),

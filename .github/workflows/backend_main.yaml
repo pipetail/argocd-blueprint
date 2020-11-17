@@ -5,6 +5,7 @@ on:
     paths:
       - 'applications/backend/**'
       - 'pkg/server/**'
+      - 'pkg/secret/**'
       - 'internal/backend/**'
       - 'docker/backend/Dockerfile'
       - '.github/workflows/backend_main.yaml'
