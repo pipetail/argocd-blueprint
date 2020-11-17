@@ -18,7 +18,10 @@ jobs:
       - uses: actions/setup-go@v2
         with:
           go-version: '^1.15.4'
-      - run: go build -o bin/backend ./cmd/backend
+        env:
+          CGO_ENABLED: "0" 
+          GOOS: linux
+      - run: go build -a -installsuffix cgo -o bin/backend ./cmd/backend
       - run: ls -lah bin/backend
       - run: echo $CR_PAT | docker login ghcr.io -u vranystepan --password-stdin
         env:
