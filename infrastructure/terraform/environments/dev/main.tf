@@ -73,3 +73,10 @@ resource "aws_route53_record" "argocd" {
   ]
 }
 
+module "sa_backend" {
+  source                  = "../../modules/sa_application"
+  cluster_oidc_issuer_url = module.eks.cluster_oidc_issuer_url
+  namespace               = "backend"
+  service_account_name    = "backend"
+  app_name = "backend"
+}

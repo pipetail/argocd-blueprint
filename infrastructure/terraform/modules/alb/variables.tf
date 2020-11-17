@@ -74,5 +74,5 @@ variable "additional_certificates_arns" {
 
 variable "interval" {
   type = number
-  default = 2
+  default = 10
 }

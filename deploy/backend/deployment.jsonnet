@@ -18,3 +18,4 @@ function(repository=defaultRepository, tag=defaultTag)
         container.new(name='backend', image=repository + ":" +tag),
     ])
     + deployment.spec.template.metadata.withAnnotations(podAnnotations)
+    + deployment.spec.template.spec.withServiceAccountName("backend")
