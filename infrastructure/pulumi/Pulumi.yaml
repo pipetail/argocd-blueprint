@@ -1,3 +1,0 @@
-name: argocd-blueprint
-runtime: go
-description: An example project with complete GitHub Actions / ArgoCD workflow
