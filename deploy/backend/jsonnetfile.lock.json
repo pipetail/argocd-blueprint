@@ -1,0 +1,26 @@
+{
+  "version": 1,
+  "dependencies": [
+    {
+      "source": {
+        "git": {
+          "remote": "https://github.com/jsonnet-libs/docsonnet.git",
+          "subdir": "doc-util"
+        }
+      },
+      "version": "3e1757637edf7405e6424cc265ea52e4f3e8b93f",
+      "sum": "t0kl7qX2Qn00gk7IrCIZufuPZwHLY5AFLwP4efedSAk="
+    },
+    {
+      "source": {
+        "git": {
+          "remote": "https://github.com/jsonnet-libs/k8s-alpha.git",
+          "subdir": "1.18"
+        }
+      },
+      "version": "23c8b320e45333d81bdf91e22998747c64e0958b",
+      "sum": "VNitwex4MrT1DnCY8+z2Iqw3rbIRtuiSf4PWYe0K6/w="
+    }
+  ],
+  "legacyImports": false
+}

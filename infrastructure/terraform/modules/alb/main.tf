@@ -45,6 +45,7 @@ resource "aws_lb_target_group" "http" {
     path     = var.traefik_healthcheck_path
     port     = var.traefik_healthcheck_port
     protocol = var.traefik_healthcheck_protocol
+    interval = var.interval
   }
 }
 
@@ -60,6 +61,7 @@ resource "aws_lb_target_group" "https" {
     path     = var.traefik_healthcheck_path
     port     = var.traefik_healthcheck_port
     protocol = var.traefik_healthcheck_protocol
+    interval = var.interval
   }
 }
 

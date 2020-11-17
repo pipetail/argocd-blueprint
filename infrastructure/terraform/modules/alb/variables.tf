@@ -71,3 +71,8 @@ variable "additional_certificates_arns" {
   type    = list(string)
   default = []
 }
+
+variable "interval" {
+  type = number
+  default = 2
+}
