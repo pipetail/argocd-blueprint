@@ -7,7 +7,7 @@ on:
       - 'pkg/server/**'
       - 'internal/backend/**'
       - 'docker/backend/Dockerfile'
-      - '.github/backend_master.yaml'
+      - '.github/workflows/backend_main.yaml'
 
 jobs:
   build-service-backend:
@@ -35,4 +35,6 @@ jobs:
     needs:
       - build-service-backend
     steps:
-      - run: echo push some crap
+      - uses: actions/checkout@v2
+      - run: sed -i "s|local defaultTag = .*;|local defaultTag = \"${{ github.sha }}\"|g" deploy/backend/main.jsonnet
+      - run: grep "defaultTag" deploy/backend/main.jsonnet
