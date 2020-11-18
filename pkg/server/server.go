@@ -33,3 +33,11 @@ func (s *Server) MountGET(path string, handler func(Secret) func(*gin.Context)) 
 func (s *Server) Run() {
 	s.Engine.Run(s.Config.GetAddress())
 }
+
+func HandleInternalServerError(c *gin.Context, message string) {
+	c.JSON(500, gin.H{
+		"status":  "error",
+		"code":    500,
+		"message": message,
+	})
+}
