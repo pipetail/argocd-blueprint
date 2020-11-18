@@ -55,6 +55,8 @@ jobs:
           draft: false
           labels: |
             ready-to-merge
+            deployment
+            automated
 
 # docker login uses personal access token because that's the only supported variant right now:
 #   https://docs.github.com/en/free-pro-team@latest/packages/managing-container-images-with-github-container-registry/pushing-and-pulling-docker-images#authenticating-to-github-container-registry
