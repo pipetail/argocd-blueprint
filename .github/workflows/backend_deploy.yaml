@@ -2,6 +2,7 @@ on:
   pull_request:
     paths:
       - 'deploy/backend/**'
+      - '.github/workflows/backend_deploy.yaml'
   
 jobs:
   verify-deploy-backend:
