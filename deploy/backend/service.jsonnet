@@ -8,5 +8,6 @@ local selectors = {
 
 function()
     service.new("backend", selectors, [
-        servicePort.newNamed(name="http", port="80", targetPort="8080"),
+        servicePort.newNamed(name="http", port=80, targetPort=8080),
     ])
+    + service.spec.withType("ClusterIP")
