@@ -22,6 +22,10 @@ func (s *Server) MountGET(path string, handler func(container.Container) func(*g
 	s.Engine.GET(path, handler(s.Container))
 }
 
+func (s *Server) MountPOST(path string, handler func(container.Container) func(*gin.Context)) {
+	s.Engine.POST(path, handler(s.Container))
+}
+
 func (s *Server) Run() {
 	s.Engine.Run(s.Container.Config.GetAddress())
 }

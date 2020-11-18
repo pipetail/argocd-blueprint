@@ -68,7 +68,16 @@ module "sa_backend" {
   cluster_oidc_issuer_url = module.eks.cluster_oidc_issuer_url
   namespace               = "backend"
   service_account_name    = "backend"
-  app_name = "backend"
+  app_name                = "backend"
+}
+
+module "sqs" {
+  source = "../../modules/sqs"
+  queues = {
+    orders = {
+      name = "orders_dev"
+    }
+  }
 }
 
 // dns

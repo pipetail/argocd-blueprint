@@ -11,5 +11,5 @@ variable "namespace" {
 }
 
 variable "app_name" {
-    type = string
+  type = string
 }

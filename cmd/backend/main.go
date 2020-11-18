@@ -37,6 +37,7 @@ func main() {
 	e.MountGET("/", handlers.Root)
 	e.MountGET("/_health/ready", handlers.HealthReady)
 	e.MountGET("/_health/alive", handlers.HealthAlive)
+	e.MountPOST("/api/orders", handlers.OrdersNew)
 
 	// start the main loop
 	e.Run()

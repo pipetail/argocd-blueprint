@@ -22,6 +22,12 @@ func HealthReady(container container.Container) func(c *gin.Context) {
 			return
 		}
 
+		_, err = container.Secret.GetString("sqsOrders")
+		if err != nil {
+			server.HandleInternalServerError(c, "could not get sqsOrders")
+			return
+		}
+
 		// todo check connection to DBs etc
 
 		// server is ready

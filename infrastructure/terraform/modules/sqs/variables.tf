@@ -1,0 +1,3 @@
+variable "queues" {
+  type = any
+}

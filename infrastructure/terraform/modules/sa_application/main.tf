@@ -35,7 +35,7 @@ resource "aws_iam_policy" "eks_sa" {
           "secretsmanager:*",
         ]
         Resource = [
-            "*",
+          "*",
         ]
       },
       {
@@ -44,7 +44,7 @@ resource "aws_iam_policy" "eks_sa" {
           "sqs:*",
         ]
         Resource = [
-            "*",
+          "*",
         ]
       },
     ]
