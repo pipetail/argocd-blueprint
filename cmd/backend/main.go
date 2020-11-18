@@ -23,6 +23,8 @@ func main() {
 	// create a new Gin server
 	e := server.New(c, s)
 	e.MountGET("/", handlers.Root)
+	e.MountGET("/_health/ready", handlers.HealthReady)
+	e.MountGET("/_health/alive", handlers.HealthAlive)
 
 	// start the main loop
 	e.Run()
