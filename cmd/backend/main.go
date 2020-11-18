@@ -11,10 +11,6 @@ import (
 )
 
 func main() {
-	// create config from environment variables
-	// this is gonna stop exexution if something's missing
-	c := config.Get()
-
 	// get secret configuration from secrets manager
 	s, err := secret.New("dev/backend", "AWSCURRENT")
 	if err != nil {
@@ -24,6 +20,7 @@ func main() {
 	// create container for dependencies
 	container := container.Container{
 		Secret: s,
+		Config: config.Get(),
 	}
 
 	// create a new Gin server
