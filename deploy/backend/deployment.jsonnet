@@ -11,7 +11,10 @@ local podAnnotations = {};
 
 function(repository=defaultRepository, tag=defaultTag)
     deployment.new(name="backend", containers=[
-        container.new(name='backend', image=repository + ":" +tag),
+        container.new(name='backend', image=repository + ":" +tag)
+        + container.withPorts([
+            containerPort.newNamed(containerPort=8080, name="http"),
+        ]),
     ])
     + deployment.spec.template.metadata.withAnnotations(podAnnotations)
     + deployment.spec.template.spec.withServiceAccountName("backend")
