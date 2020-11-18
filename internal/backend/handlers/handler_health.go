@@ -2,10 +2,10 @@ package handlers
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/pipetail/argocd-blueprint/pkg/server"
+	"github.com/pipetail/argocd-blueprint/pkg/container"
 )
 
-func HealthReady(secret server.Secret) func(c *gin.Context) {
+func HealthReady(c container.Container) func(c *gin.Context) {
 	return func(c *gin.Context) {
 		c.JSON(200, gin.H{
 			"ready": "ok",
@@ -13,7 +13,7 @@ func HealthReady(secret server.Secret) func(c *gin.Context) {
 	}
 }
 
-func HealthAlive(secret server.Secret) func(c *gin.Context) {
+func HealthAlive(c container.Container) func(c *gin.Context) {
 	return func(c *gin.Context) {
 		c.JSON(200, gin.H{
 			"alive": "ok",

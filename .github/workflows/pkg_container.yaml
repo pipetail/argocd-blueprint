@@ -1,19 +1,16 @@
 on:
   pull_request:
     paths:
-      - 'pkg/server/**'
-      - 'pkg/secret/**'
       - 'pkg/container/**'
-      - 'internal/backend/**'
-      - 'cmd/backend/**'
   
 jobs:
-  verify-service-backend:
-    name: verify-service-backend
+  verify-pkg-container:
+    name: verify-pkg-container
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-go@v2
         with:
           go-version: '^1.15.4'
-      - run: go build -o bin/backend ./cmd/backend
+      - run: go test ./pkg/container/
+

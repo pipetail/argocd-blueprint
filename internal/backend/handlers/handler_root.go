@@ -2,10 +2,10 @@ package handlers
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/pipetail/argocd-blueprint/pkg/server"
+	"github.com/pipetail/argocd-blueprint/pkg/container"
 )
 
-func Root(secret server.Secret) func(c *gin.Context) {
+func Root(c container.Container) func(c *gin.Context) {
 	return func(c *gin.Context) {
 		// mysqlPassword, err := secret.GetString("mysqlPassword")
 		// if err != nil {

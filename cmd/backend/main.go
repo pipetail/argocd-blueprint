@@ -5,6 +5,7 @@ import (
 
 	"github.com/pipetail/argocd-blueprint/internal/backend/config"
 	"github.com/pipetail/argocd-blueprint/internal/backend/handlers"
+	"github.com/pipetail/argocd-blueprint/pkg/container"
 	"github.com/pipetail/argocd-blueprint/pkg/secret"
 	"github.com/pipetail/argocd-blueprint/pkg/server"
 )
@@ -20,8 +21,13 @@ func main() {
 		log.Fatalf("could not obtain secrets: %s", err)
 	}
 
+	// create container for dependencies
+	container := container.Container{
+		Secret: s,
+	}
+
 	// create a new Gin server
-	e := server.New(c, s)
+	e := server.New(container)
 	e.MountGET("/", handlers.Root)
 	e.MountGET("/_health/ready", handlers.HealthReady)
 	e.MountGET("/_health/alive", handlers.HealthAlive)

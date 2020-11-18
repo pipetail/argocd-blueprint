@@ -3,12 +3,13 @@ on:
     branches:
       - main
     paths:
-      - 'applications/backend/**'
       - 'pkg/server/**'
       - 'pkg/secret/**'
+      - 'pkg/container/**'
       - 'internal/backend/**'
       - 'docker/backend/Dockerfile'
       - '.github/workflows/backend_main.yaml'
+      - 'cmd/backend/**'
 
 jobs:
   build-service-backend:
