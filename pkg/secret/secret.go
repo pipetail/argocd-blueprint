@@ -10,10 +10,10 @@ import (
 )
 
 type Secret struct {
-	MySQLPassword string `json:"mysqlPassword"`
+	Entries map[string]string
 }
 
-func Get(name string, version string) (Secret, error) {
+func New(name string, version string) (Secret, error) {
 	secret := Secret{}
 
 	sess := session.Must(session.NewSession())
@@ -29,10 +29,14 @@ func Get(name string, version string) (Secret, error) {
 		return secret, fmt.Errorf("could not obtain secret: %s", err)
 	}
 
-	err = json.Unmarshal([]byte(*result.SecretString), &secret)
+	err = json.Unmarshal([]byte(*result.SecretString), &secret.Entries)
 	if err != nil {
 		return secret, fmt.Errorf("could not unmarshal secret: %s", err)
 	}
 
 	return secret, nil
+}
+
+func (s Secret) GetMap() map[string]string {
+	return s.Entries
 }

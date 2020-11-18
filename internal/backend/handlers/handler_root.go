@@ -1,20 +1,14 @@
 package handlers
 
 import (
-	"fmt"
-
 	"github.com/gin-gonic/gin"
-	"github.com/pipetail/argocd-blueprint/pkg/secret"
+	"github.com/pipetail/argocd-blueprint/pkg/server"
 )
 
-func Root(c *gin.Context) {
-
-	s, err := secret.Get("dev/backend", "AWSCURRENT")
-	if err != nil {
-		panic(fmt.Sprintf("could not receive secrets: %s", err))
+func Root(secret server.Secret) func(c *gin.Context) {
+	return func(c *gin.Context) {
+		c.JSON(200, gin.H{
+			"hello": secret.GetMap(),
+		})
 	}
-
-	c.JSON(200, gin.H{
-		"hello": s.MySQLPassword,
-	})
 }

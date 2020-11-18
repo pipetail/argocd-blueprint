@@ -6,23 +6,27 @@ type InputConfig interface {
 	GetAddress() string
 }
 
+type Secret interface {
+	GetMap() map[string]string
+}
+
 type Server struct {
 	Engine *gin.Engine
 	Config InputConfig
-	// Secrets["nameOfSecret"] = "/v1.0/secrets/kubernetes/my-secret"
-	Secrets map[string]string
+	Secret Secret
 }
 
-func New(c InputConfig) Server {
+func New(c InputConfig, s Secret) Server {
 	engine := gin.Default()
 	return Server{
 		Engine: engine,
 		Config: c,
+		Secret: s,
 	}
 }
 
-func (s *Server) MountGET(path string, handler func(*gin.Context)) {
-	s.Engine.GET(path, handler)
+func (s *Server) MountGET(path string, handler func(Secret) func(*gin.Context)) {
+	s.Engine.GET(path, handler(s.Secret))
 }
 
 func (s *Server) Run() {
