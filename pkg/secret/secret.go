@@ -13,10 +13,8 @@ type Secret struct {
 	Entries map[string]string
 }
 
-func New(name string, version string) (Secret, error) {
+func New(sess *session.Session, name string, version string) (Secret, error) {
 	secret := Secret{}
-
-	sess := session.Must(session.NewSession())
 	svc := secretsmanager.New(sess)
 
 	input := &secretsmanager.GetSecretValueInput{

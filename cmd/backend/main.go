@@ -3,6 +3,8 @@ package main
 import (
 	"log"
 
+	"github.com/aws/aws-sdk-go/aws/session"
+	"github.com/aws/aws-sdk-go/service/sqs"
 	"github.com/pipetail/argocd-blueprint/internal/backend/config"
 	"github.com/pipetail/argocd-blueprint/internal/backend/handlers"
 	"github.com/pipetail/argocd-blueprint/pkg/container"
@@ -11,16 +13,23 @@ import (
 )
 
 func main() {
+	// create AWS session
+	sess := session.Must(session.NewSession())
+
 	// get secret configuration from secrets manager
-	s, err := secret.New("dev/backend", "AWSCURRENT")
+	s, err := secret.New(sess, "dev/backend", "AWSCURRENT")
 	if err != nil {
 		log.Fatalf("could not obtain secrets: %s", err)
 	}
+
+	// create SQS service
+	sqsService := sqs.New(sess)
 
 	// create container for dependencies
 	container := container.Container{
 		Secret: s,
 		Config: config.Get(),
+		SQS:    sqsService,
 	}
 
 	// create a new Gin server

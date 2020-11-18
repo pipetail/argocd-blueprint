@@ -38,6 +38,15 @@ resource "aws_iam_policy" "eks_sa" {
             "*",
         ]
       },
+      {
+        Effect = "Allow"
+        Action = [
+          "sqs:*",
+        ]
+        Resource = [
+            "*",
+        ]
+      },
     ]
     Version = "2012-10-17"
   })
