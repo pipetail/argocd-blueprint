@@ -7,8 +7,22 @@ import (
 
 func Root(secret server.Secret) func(c *gin.Context) {
 	return func(c *gin.Context) {
+		mysqlPassword, err := secret.GetString("mysqlPassword")
+		if err != nil {
+			handleError(c, "could not get configuration")
+			return
+		}
+
 		c.JSON(200, gin.H{
-			"hello": secret.GetMap(),
+			"password": mysqlPassword,
 		})
 	}
+}
+
+func handleError(c *gin.Context, message string) {
+	c.JSON(500, gin.H{
+		"status":  "error",
+		"code":    500,
+		"message": message,
+	})
 }

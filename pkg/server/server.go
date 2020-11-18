@@ -8,6 +8,7 @@ type InputConfig interface {
 
 type Secret interface {
 	GetMap() map[string]string
+	GetString(key string) (string, error)
 }
 
 type Server struct {

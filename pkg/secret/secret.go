@@ -40,3 +40,11 @@ func New(name string, version string) (Secret, error) {
 func (s Secret) GetMap() map[string]string {
 	return s.Entries
 }
+
+func (s Secret) GetString(key string) (string, error) {
+	val, exists := s.Entries[key]
+	if exists {
+		return val, nil
+	}
+	return val, fmt.Errorf("key %s does not exist", key)
+}
