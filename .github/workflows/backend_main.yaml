@@ -43,7 +43,7 @@ jobs:
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v3
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.CR_PAT }}
           commit-message: '[Deployment][Backend] update current image tag'
           committer: GitHub <noreply@github.com>
           author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
@@ -59,3 +59,6 @@ jobs:
 # docker login uses personal access token because that's the only supported variant right now:
 #   https://docs.github.com/en/free-pro-team@latest/packages/managing-container-images-with-github-container-registry/pushing-and-pulling-docker-images#authenticating-to-github-container-registry
 #   https://docs.github.com/en/free-pro-team@latest/actions/reference/encrypted-secrets
+
+# github action is not triggered if it's pushed with GITHUB_TOKEN:
+#   actions need PAT https://github.com/peter-evans/create-pull-request/issues/48
