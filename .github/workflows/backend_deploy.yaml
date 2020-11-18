@@ -16,4 +16,6 @@ jobs:
       - run: go get github.com/google/go-jsonnet/cmd/jsonnet
       - run: jsonnet -J deploy/vendor deploy/backend/deployment.jsonnet
       - run: jsonnet -J deploy/vendor deploy/backend/serviceaccount.jsonnet
+      - run: jsonnet -J deploy/vendor deploy/backend/ingressroute.jsonnet
+      - run: jsonnet -J deploy/vendor deploy/backend/service.jsonnet
 

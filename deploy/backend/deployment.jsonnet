@@ -14,7 +14,13 @@ function(repository=defaultRepository, tag=defaultTag)
         container.new(name='backend', image=repository + ":" +tag)
         + container.withPorts([
             containerPort.newNamed(containerPort=8080, name="http"),
-        ]),
+        ])
+
+        + readinessProbe.withFailureThreshold(1)
+        + readinessProbe.withInitialDelaySeconds(30)
+        + readinessProbe.withPeriodSeconds(10)
+        + readinessProbe.httpGet.withPort(8080)
+        + readinessProbe.httpGet.withPath('/_health/ready'),
     ])
     + deployment.spec.template.metadata.withAnnotations(podAnnotations)
     + deployment.spec.template.spec.withServiceAccountName("backend")
