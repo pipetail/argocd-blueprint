@@ -63,6 +63,25 @@ module "eks" {
   ]
 }
 
+module "sa_backend" {
+  source                  = "../../modules/sa_application"
+  cluster_oidc_issuer_url = module.eks.cluster_oidc_issuer_url
+  namespace               = "backend"
+  service_account_name    = "backend"
+  app_name = "backend"
+}
+
+// dns
+resource "aws_route53_record" "app" {
+  zone_id = data.aws_route53_zone.this.zone_id
+  name    = "app.${data.aws_route53_zone.this.name}"
+  type    = "CNAME"
+  ttl     = "60"
+  records = [
+    module.alb.dns_name,
+  ]
+}
+
 resource "aws_route53_record" "argocd" {
   zone_id = data.aws_route53_zone.this.zone_id
   name    = "argocd.${data.aws_route53_zone.this.name}"
@@ -71,12 +90,4 @@ resource "aws_route53_record" "argocd" {
   records = [
     module.alb.dns_name,
   ]
-}
-
-module "sa_backend" {
-  source                  = "../../modules/sa_application"
-  cluster_oidc_issuer_url = module.eks.cluster_oidc_issuer_url
-  namespace               = "backend"
-  service_account_name    = "backend"
-  app_name = "backend"
 }

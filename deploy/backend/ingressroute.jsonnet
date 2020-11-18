@@ -10,7 +10,7 @@
         ],
         routes: [
             {
-                match: "Host(`dev.eks.rocks`) && PathPrefix(`/api`)",
+                match: "Host(`app.dev.eks.rocks`) && PathPrefix(`/api`)",
                 kind: "Rule",
                 priority: 1,
                 services: [
