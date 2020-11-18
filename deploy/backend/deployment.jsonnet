@@ -5,7 +5,7 @@ local containerPort = k.core.v1.containerPort;
 local readinessProbe = container.readinessProbe;
 
 local defaultRepository = "ghcr.io/pipetail/argocd-blueprint/backend";
-local defaultTag = "808da12a5e91189f2db72410e2c9afe1e94c4672";
+local defaultTag = "1c9919076796175e5d4a7345bf828932b2bae862";
 
 local podAnnotations = {};
 
