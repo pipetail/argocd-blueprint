@@ -20,7 +20,7 @@ func OrdersNew(container container.Container) func(c *gin.Context) {
 
 		// send a new message to SQS queue
 		_, err = container.SQS.SendMessage(&sqs.SendMessageInput{
-			MessageBody: aws.String("test"),
+			MessageBody: aws.String("test bla bla bla"),
 			QueueUrl:    aws.String(queueUrl),
 		})
 		if err != nil {
