@@ -24,4 +24,6 @@ Blueprint for development and deployment workflow with GitHub actions and ArgoCD
 
 ### Argo CD
 
+### Argo
+
 ### Codeac
